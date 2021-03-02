@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="ba7cde02-d8ac-4c80-83ad-236c5346faf5" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CodeStyleSettingsInfer">
+    <option name="done" value="true" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="importingSettings">
+      <MavenImportingSettings>
+        <option name="importAutomatically" value="true" />
+        <option name="jdkForImporter" value="11" />
+        <option name="vmOptionsForImporter" value="-Xmx768m" />
+      </MavenImportingSettings>
+    </option>
+  </component>
+  <component name="ProjectCodeStyleSettingsMigration">
+    <option name="version" value="1" />
+  </component>
+  <component name="ProjectId" id="1jG4lDRD7reFUEcYwLrHNcmEHrI" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="go.import.settings.migrated" value="true" />
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="project.structure.last.edited" value="Global Libraries" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="reference.settings.project.maven.repository.indices" />
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="ba7cde02-d8ac-4c80-83ad-236c5346faf5" name="Default Changelist" comment="" />
+      <created>1603417243052</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1603417243052</updated>
+      <workItem from="1603417245163" duration="6863000" />
+      <workItem from="1603706105017" duration="942000" />
+      <workItem from="1604023556854" duration="733000" />
+      <workItem from="1604296648406" duration="265000" />
+      <workItem from="1605683525553" duration="514000" />
+      <workItem from="1605690940986" duration="23000" />
+      <workItem from="1606293352435" duration="471000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="220" y="34" key="#Project_Structure" timestamp="1603434442624">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state x="220" y="34" key="#Project_Structure/0.0.1440.900@0.0.1440.900" timestamp="1603434442624" />
+    <state x="489" y="67" key="#com.intellij.ide.util.MemberChooser" timestamp="1603419508844">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state x="489" y="67" key="#com.intellij.ide.util.MemberChooser/0.0.1440.900@0.0.1440.900" timestamp="1603419508844" />
+    <state x="80" y="0" width="1199" height="897" key="SettingsEditor" timestamp="1603435897087">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state x="80" y="0" width="1199" height="897" key="SettingsEditor/0.0.1440.900@0.0.1440.900" timestamp="1603435897087" />
+  </component>
+</project>

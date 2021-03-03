@@ -8,11 +8,14 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 
 import entity.HttpParamsEntity;
+import utils.CheckUtil;
 
 public class AlertMessageUtil {
 	static Map<String, String> eventInfoMap = null;
 
 	public static void main(String[] args) {
+		
+		String mes = "";
 		
 	}
 	
@@ -30,7 +33,7 @@ public class AlertMessageUtil {
 		
 		JSONObject paramsObject = JSON.parseObject(messageContent);
 		String paramsStr = paramsObject.getString("params");
-		System.out.println(paramsStr);
+		System.out.println("读取的脚本参数：" + paramsStr);
 		
 		eventInfoMap = JSONObject.toJavaObject(JSON.parseObject(messageContent),Map.class);
 		System.out.println("eventInfoMap: " + eventInfoMap);

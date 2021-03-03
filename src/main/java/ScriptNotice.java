@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import entity.HttpParamsEntity;
+import utils.CheckUtil;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -38,26 +39,40 @@ public class ScriptNotice {
 
 		JSONArray lineArray = JSON.parseArray(line);
 		for(int i = 0; i < lineArray.size(); i++) {
-			// 拼接url
+			
+			if(!CheckUtil.isJson(lineArray.get(i).toString())) {
+				System.out.println("不是有效的json，请检查脚本参数...");
+				break;
+			} 
+			
 			HttpParamsEntity entity = new HttpParamsEntity();
 			for (EventInfo event : res) {
-				entity = AlertMessageUtil.handleRequestParams(lineArray.get(i).toString());
-				String ip = entity.getIp();
-				String port = entity.getPort();
-				String paramStr = entity.getParams();
-				String method = entity.getMethod();
-				String path = entity.getPath();
-
-				String url = "http://" + ip + ":" + port + "/" + path;
-				System.out.println("生成的url: " + url + ",paramStr: " + paramStr +",method: " + method);
 				
-				if("get".equals(method)) {
-					HttpUtil.sendGet(url, paramStr);
-				} else if("post".equals(method)){
-					HttpUtil.sendPost(url, paramStr);
+				entity = AlertMessageUtil.handleRequestParams(lineArray.get(i).toString());
+				if(!CheckUtil.isEmpty(entity)) {
+				
+					String ip = entity.getIp();
+					String port = entity.getPort();
+					String paramStr = entity.getParams();
+					String method = entity.getMethod();
+					String path = entity.getPath();
+
+					String url = "http://" + ip + ":" + port + "/" + path;
+					System.out.println("生成的url: " + url + ",paramStr: " + paramStr +",method: " + method);
+					
+					String result = "";
+					if("get".equals(method)) {
+						result = HttpUtil.sendGet(url, paramStr);
+					} else if("post".equals(method)){
+						result = HttpUtil.sendPost(url, paramStr);
+					}
+					System.out.println("请求：" + url + ",参数为：" + paramStr + ",响应结果为：" + result);
 				}
+				
 			}
 		}
+		
+		System.out.println("脚本结束！！！");
 	}
 
 	/**

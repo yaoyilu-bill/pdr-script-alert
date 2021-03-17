@@ -28,6 +28,8 @@ public class ScriptNotice {
 		String line = in.readLine();
 		System.out.println("读取告警内容为：" + line);
 		
+//		String line = "[{\"eventDisplayId\":\"53\",\"eventName\":\"test_eventSubject\",\"eventDescription\":\"测试告警对象\",\"alertLevel\":\"灾难\",\"eventTime\":\"2021-03-17 18:22:00\",\"alertSourceType\":\"日志告警\",\"alertName\":\"test_eventSubject\",\"alertDescription\":\"测试告警对象\",\"alertInterval\":\"每分钟\",\"alertExecuteCount\":\"711\",\"eventId\":\"69fc53f6-9635-4725-8962-04c498ff6ecd\",\"eventSubject\":\"登录结果=success, 登录主机=jjh2239, count=1\",\"phoenixHost\":\"http://100.100.69.143:9200\",\"userName\":\"ylyao\",\"realUserName\":null,\"operationType\":\"notice\",\"eventDetails\":\"> 1. 条件1, 级别0: 字段【count】异常, 当前值【1.0】大于等于 1.0。\\n\",\"alertConditionCnt\":\"1\",\"operateNote\":\"\",\"params\":{\"interface\":\"{\\\"ip\\\":\\\"100.100.69.143\\\",\\\"port\\\":\\\"8081\\\",\\\"method\\\":\\\"post\\\",\\\"path\\\":\\\"event/post\\\",\\\"pdrParams\\\":[{\\\"content\\\":\\\"eventDetails\\\"},{\\\"object\\\":\\\"eventSubject\\\"}],\\\"otherParams\\\":[{\\\"source\\\":\\\"Test\\\"},{\\\"group\\\":\\\"aaa\\\"},{\\\"attachement\\\":\\\"eventName,userName\\\"}]}\"},\"additionContent\":[{\"count\":\"46\",\"TIME\":\"2021-03-17 18:22:00\",\"附加内容名称\":\"testCount\",\"SPL\":\"repo=\\\"*linux_audit\\\" \\\"su\\\" | rex field=_raw \\\"^.*pid=(?<pid>\\\\d+).*acct=\\\\\\\"(?<account>.*?)\\\\\\\".*hostname=(?<hostname>.*?)\\\\s.*res=(?<res>.*?)\\\\'\\\" | where isNotNull(account) | dedup pid | stats count() by _time,hostname,res | fields hostname,res,count | sort by _time | rename _time as 操作时间,hostname as 登录主机,res as 登录结果 | stats count()  | limit 500\"}]}]";
+
 		List<EventInfo> res = readList(line, EventInfo.class);
 		String message = getMessageContent(res);
 		System.out.println("读取告警参数为：" + message);
@@ -104,7 +106,8 @@ public class ScriptNotice {
 					.append("[userName: " + info.getUserName() + "],") // 告警创建者的用户名
 					.append("[realUserName: " + info.getRealUserName() + "],") // 真实用户名
 					.append("[params: " + info.getParams() + "],") // web页面配置的自定义参数
-					.append("[additionContent: " + info.getAdditionContent() + "],"); // 附加内容
+					.append("[additionContent: " + info.getAdditionContent() + "],")
+					.append("[eventSubject: "+ info.getEventSubject() +"]"); // 附加内容
 
 			for (Map.Entry<String, String> entry : info.getParams().entrySet()) {
 				sb.append("[" + entry.getKey() + ": " + entry.getValue() + "], ");

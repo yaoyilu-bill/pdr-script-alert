@@ -14,9 +14,6 @@ public class AlertMessageUtil {
 	static Map<String, String> eventInfoMap = null;
 
 	public static void main(String[] args) {
-		
-		String mes = "";
-		
 	}
 	
 
@@ -27,7 +24,6 @@ public class AlertMessageUtil {
 	 * @param eventInfo
 	 * @return 
 	 */
-	
 	public static HttpParamsEntity handleRequestParams(String messageContent) {
 		HttpParamsEntity entity = new HttpParamsEntity();
 		
@@ -72,7 +68,7 @@ public class AlertMessageUtil {
 	 * @return
 	 * @throws UnsupportedEncodingException 
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({ "unchecked", "deprecation" })
 	public static String getParams(String paramsStr) throws UnsupportedEncodingException {
 		JSONObject paramObject = JSON.parseObject(paramsStr);
 		
@@ -92,13 +88,18 @@ public class AlertMessageUtil {
 				while(entriesEventInfoMap.hasNext()) {
 					StringBuilder sb = new StringBuilder();
 					Map.Entry entriesEventInfoEntry = (Map.Entry) entriesEventInfoMap.next();
-					if(entry.getValue().equals(entriesEventInfoEntry.getKey().toString())) {
-						if("eventDetails".equals(entry.getValue())) {
+					if (entry.getValue().equals(entriesEventInfoEntry.getKey().toString())) {
+						// [深农商单独处理]
+						if ("eventDetails".equals(entry.getValue())) {
 							String eventDetails = entriesEventInfoEntry.getValue().toString();
 							sb.append(entry.getKey()).append("=").append(URLEncoder.encode(eventDetails, "UTF-8")).append("&");
+						} else if ("eventSubject".equals(entry.getValue())){
+							sb.append(getSubjectName(entry.getKey().toString(), entriesEventInfoEntry.getValue().toString())).append("&");
 						} else {
-							sb.append(entry.getKey()).append("=").append(entriesEventInfoEntry.getValue()).append("&");
+							sb.append(entry.getKey()).append("=")
+									.append(URLEncoder.encode(entriesEventInfoEntry.getValue().toString())).append("&");
 						}
+						
 					}
 					if(!sb.toString().isEmpty()) {
 						requestParams = requestParams.append(sb);
@@ -116,12 +117,61 @@ public class AlertMessageUtil {
 			Iterator entryOtherParam = otherParamMap.entrySet().iterator();
 			while(entryOtherParam.hasNext()) {
 				Map.Entry entry = (Map.Entry) entryOtherParam.next();
-				otherSB.append(entry.getKey()).append("=").append(entry.getValue()).append("&");
+				
+				//[深农商单独处理 attachement = $alartname+$eventtime]
+				if("attachement".equals(entry.getKey())) {
+					otherSB.append(entry.getKey()).append("=").append(URLEncoder.encode(getPDRAttachementValue(entry.getValue().toString()), "UTF-8")).append("&");
+				} else {
+					otherSB.append(entry.getKey()).append("=").append(entry.getValue()).append("&");
+				}
 			}
 			requestParams = requestParams.append(otherSB);
 		}
 
 		return requestParams.toString();
+	}
+	
+	//深农商处理subjectName
+	public static String getSubjectName(String key,String subjectName) throws UnsupportedEncodingException {
+		
+		String[] arr = subjectName.split(",");
+		StringBuilder requestParams = new StringBuilder();
+		
+		for(int i = 0 ; i < arr.length; i++) {
+			String result = arr[i].trim();
+			int index = result.indexOf("=");
+			requestParams.append(result.substring(result.indexOf("=")+1, result.length())).append(" ");
+		}
+		return key +"="+ URLEncoder.encode(requestParams.toString(), "UTF-8");
+	}
+	
+	/**
+	 * 深农商处理 attachement<br>
+	 * {"attachement":"evenTtime,eventSubject"} <br>
+	 * \n-前后加个空格 就是 "value1 \n- value2"<br>
+	 * @param attachementValue 
+	 * @return attachStr
+	 * 
+	 */
+	public static String getPDRAttachementValue(String attachementValue) {
+		if(attachementValue.isEmpty()) return "";
+		
+		StringBuilder sb = new StringBuilder();
+		String attachStr = "";
+		
+		String[] arr = attachementValue.split(",");
+		for(int i = 0; i < arr.length; i++) {
+			Iterator entriesEventInfoMap = eventInfoMap.entrySet().iterator();
+			while(entriesEventInfoMap.hasNext()) {
+				Map.Entry entriesEventInfoEntry = (Map.Entry) entriesEventInfoMap.next();
+				if(arr[i].equals(entriesEventInfoEntry.getKey())) {
+					sb.append(entriesEventInfoEntry.getValue()).append(" ").append("\n-").append(" ");
+				}
+			}
+		}
+		attachStr =  sb.toString().substring(0, sb.toString().length()-2);
+		System.out.println("获取的attachement :" + attachStr.trim());
+		return attachStr.trim();
 	}
 
 }

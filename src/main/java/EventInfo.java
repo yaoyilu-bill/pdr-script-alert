@@ -49,8 +49,12 @@ public class EventInfo{
   private String userName;
   @JsonProperty("realUserName")
   private String realUserName;
+  @JsonProperty("eventSubject")
+  private String eventSubject;
 
   
+
+
 
 public EventInfo(){}
 
@@ -220,5 +224,13 @@ public EventInfo(){}
 
 	public void setRealUserName(String realUserName) {
 		this.realUserName = realUserName;
+	}
+	
+	public String getEventSubject() {
+		return eventSubject;
+	}
+
+	public void setEventSubject(String eventSubject) {
+		this.eventSubject = eventSubject;
 	}
 }

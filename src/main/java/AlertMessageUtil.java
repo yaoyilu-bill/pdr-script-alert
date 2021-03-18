@@ -118,8 +118,8 @@ public class AlertMessageUtil {
 			while(entryOtherParam.hasNext()) {
 				Map.Entry entry = (Map.Entry) entryOtherParam.next();
 				
-				//[深农商单独处理 attachement = $alartname+$eventtime]
-				if("attachement".equals(entry.getKey())) {
+				//[深农商单独处理 attachment = $alartname+$eventtime]
+				if("attachment".equals(entry.getKey())) {
 					otherSB.append(entry.getKey()).append("=").append(URLEncoder.encode(getPDRAttachementValue(entry.getValue().toString()), "UTF-8")).append("&");
 				} else {
 					otherSB.append(entry.getKey()).append("=").append(entry.getValue()).append("&");
@@ -146,8 +146,8 @@ public class AlertMessageUtil {
 	}
 	
 	/**
-	 * 深农商处理 attachement<br>
-	 * {"attachement":"evenTtime,eventSubject"} <br>
+	 * 深农商处理 attachment<br>
+	 * {"attachment":"evenTtime,eventSubject"} <br>
 	 * \n-前后加个空格 就是 "value1 \n- value2"<br>
 	 * @param attachementValue 
 	 * @return attachStr

@@ -28,7 +28,7 @@ value为以下json
       "group": "aaa"
     },
     {
-      "attachement": "userName,realUserName"
+      "attachment": "userName,realUserName"
     }
   ]
 }
@@ -41,7 +41,7 @@ otherParams 下的参数：	自定义参数
 
 **深农商特殊处理:**
 > pdrParams:[{"object":"eventSubject"}]	其中从告警对象中获取eventSubject的值为k1=v1, k2=v2，此处作为深农商特殊处理，获取得到的结果为：object=v1 v2
-> 其中key=attachement , value为pdr告警对象中属性值。
+> 其中key=attachment , value为pdr告警对象中属性值。
 
 * * *
 
